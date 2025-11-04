@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Vinculación</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="form-header">
+    
+    <div class="logo-container">
+        <img src="logo.png" alt="Gavassa Logo">
+    </div>
+    
+    <div class="title-container">
+        <h2>VINCULACIÓN Y/O ACTUALIZACIÓN DE DATOS CLIENTES PROVEEDORES Y EMPLEADOS Y TERCEROS GENERAL</h2>
+    </div>
+    
+    <div class="info-container">
+        <div class="info-box">F - R - 14</div>
+        <div class="info-box">N.R: 3</div>
+        <div class="info-box">21-09-2024</div>
+    </div>
+    
+    </header>
+
+    <form id="form-vinculacion">
+
+        <fieldset>
+            <legend>Información General</legend>
+            <div class="form-group">
+                <label for="fecha-diligenciamiento">Fecha Diligenciamiento:</label>
+                <input type="date" id="fecha-diligenciamiento" name="fecha_diligenciamiento" required>
+            </div>
+            
+            <div class="form-group">
+                <p>Tipo de Vinculación:</p>
+                <label><input type="radio" name="tipo_vinculacion" value="inicial" required> Inicial</label>
+                <label><input type="radio" name="tipo_vinculacion" value="actualizacion"> Actualización</label>
+            </div>
+
+            <div class="form-group">
+                <p>Clase de Tercero:</p>
+                <label><input type="radio" name="clase_tercero" value="cliente"> Cliente</label>
+                <label><input type="radio" name="clase_tercero" value="proveedor"> Proveedor </label>
+                <label><input type="radio" name="clase_tercero" value="empleado"> Empleado </label>
+                <label><input type="radio" name="clase_tercero" value="codeudor"> Codeudor </label>
+                <label>
+                    <input type="radio" id="clase-tercero-otro" name="clase_tercero" value="otro"> Otro 
+                </label>
+                <input type="text" id="clase-tercero-cual" name="clase_tercero_cual" class="hidden" placeholder="¿Cuál?"> 
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Datos Persona Natural </legend>
+            <div class="form-group">
+                <label for="nombres-apellidos">Nombres y Apellidos:</label>
+                <input type="text" id="nombres-apellidos" name="nombres_apellidos" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Documento de Identificación:</label>
+                <label><input type="radio" name="tipo_doc" value="cc"> C.C.</label>
+                <label><input type="radio" name="tipo_doc" value="ce"> C.E.</label>
+                <label><input type="radio" name="tipo_doc" value="rut"> RUT</label>
+                <label><input type="radio" name="tipo_doc" value="pasaporte"> Pasaporte</label>
+            </div>
+
+            <div class="form-group">
+                <label for="num-documento">No. Documento:</label>
+                <input type="text" id="num-documento" name="num_documento" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono">
+            </div>
+            </fieldset>
+
+        <fieldset>
+            <legend>Perfil Tributario y Operaciones</legend>
+            <div class="tributario-grid">
+                
+                <div class="form-row">
+                    <div class="form-group flex-col">
+                        <label>NO DECLARANTE</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="no_declarante" value="si"> SI</label>
+                            <label><input type="radio" name="no_declarante" value="no"> NO</label>
+                        </div>
+                    </div>
+                    <div class="form-group flex-col">
+                        <label>RESPONSABLE DE IVA</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="responsable_iva" value="si"> SI</label>
+                            <label><input type="radio" name="responsable_iva" value="no"> NO</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label>TIPO DE REGIMEN</label>
+
+                        <label><input type="radio" name="regimen" value="simple"> REGIMEN SIMPLE</label>
+                    </div>
+                    <div class="form-group">
+                        <label><input type="radio" name="regimen" value="contribuyente"> GRAN CONTRIBUYENTE</label>
+                    </div>
+                    <div class="form-group">
+                        <label><input type="radio" name="regimen" value="autoretenedor"> AUTORETENEDOR</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>¿IMPORTA BIENES?</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="importa_bienes" value="si"> SI</label>
+                            <label><input type="radio" name="importa_bienes" value="no"> NO</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿EXPORTA BIENES?</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="exporta_bienes" value="si"> SI</label>
+                            <label><input type="radio" name="exporta_bienes" value="no"> NO</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿IMPORTA SERVICIOS?</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="importa_servicios" value="si"> SI</label>
+                            <label><input type="radio" name="importa_servicios" value="no"> NO</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿EXPORTA SERVICIOS?</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="exporta_servicios" value="si"> SI</label>
+                            <label><input type="radio" name="exporta_servicios" value="no"> NO</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>¿REALIZA OPERACIONES EN MONEDA EXTRANJERA?</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="op_extranjera" value="si"> SI</label>
+                            <label><input type="radio" name="op_extranjera" value="no"> NO</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿TIENE PRODUCTOS EN MONEDA EXTRANJERA?</label>
+                        <div class="si-no-group">
+                            <label><input type="radio" name="prod_extranjera" value="si"> SI</label>
+                            <label><input type="radio" name="prod_extranjera" value="no"> NO</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipo_producto">TIPO DE PRODUCTO</label>
+                        <input type="text" id="tipo_producto" name="tipo_producto">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_producto">IDENTIFICACION DEL PRODUCTO</label>
+                        <input type="text" id="id_producto" name="id_producto">
+                    </div>
+                    <div class="form-group">
+                        <label for="promedio_mes">PROMEDIO MES</label>
+                        <input type="text" id="promedio_mes" name="promedio_mes">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pais">PAIS</label>
+                        <input type="text" id="pais" name="pais">
+                    </div>
+                    <div class="form-group">
+                        <label for="moneda">MONEDA</label>
+                        <input type="text" id="moneda" name="moneda">
+                    </div>
+                    <div class="form-group">
+                        <label for="entidad">ENTIDAD</label>
+                        <input type="text" id="entidad" name="entidad">
+                    </div>
+                </div>
+
+            </div> 
+        </fieldset>
+        
+        <fieldset>
+            <legend>Declaración de Personas Expuestas Políticamente (PEP) </legend>
+            <div class="form-group">
+                <p>¿Es una Persona Expuesta Políticamente, o ejerce algún cargo público, o maneja recursos del estado? </p>
+                <label><input type="radio" name="es_pep" id="pep-si" value="si"> SI </label>
+                <label><input type="radio" name="es_pep" id="pep-no" value="no"> NO </label>
+            </div>
+
+            <div id="pep-declaration-section" class="hidden">
+                <p>Diligenciar solo si la respuesta anterior es si.</p>
+                <div class="form-group">
+                    <label>1. ¿Por su cargo o actividad administra recursos públicos? </label>
+                    <label><input type="radio" name="pep_q1" value="si"> SI </label>
+                    <label><input type="radio" name="pep_q1" value="no"> NO </label>
+                </div>
+                <div class="form-group">
+                    <label>2. ¿Por su cargo o actividad ejerce algún grado de poder público? </label>
+                    <label><input type="radio" name="pep_q2" value="si"> SI </label>
+                    <label><input type="radio" name="pep_q2" value="no"> NO </label>
+                </div>
+                <div class="form-group">
+                    <label>5. ¿Existe algún vínculo entre usted y una persona que maneje recursos públicos o que goza de algún grado de poder público? </label>
+                    <label><input type="radio" name="pep_q5" id="pep-q5-si" value="si"> SI </label>
+                    <label><input type="radio" name="pep_q5" id="pep-q5-no" value="no"> NO </label>
+                </div>
+
+                <div id="pep-relative-section" class="hidden">
+                    <p>Si en la pregunta 5 su respuesta es SI, por favor diligencie la siguiente información: </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parentesco</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Tipo Doc.</th>
+                                <th>Num Doc.</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="parentesco_1"></td>
+                                <td><input type="text" name="nombre_pariente_1"></td>
+                                <td><input type="text" name="tipo_doc_pariente_1"></td>
+                                <td><input type="text" name="num_doc_pariente_1"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Declaración de Origen de Fondos</legend>
+            <div class="form-group">
+                <label for="origen-fondos">El Origen de mis bienes y/o recursos provienen de: </label>
+                <textarea id="origen-fondos" name="origen_fondos" rows="4"></textarea>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Autorizaciones y Firma</legend>
+            
+            <div class="auth-section">
+                <h3>Consulta Centrales de Riesgo </h3>
+                <p>En mi calidad de titular de la información, actuando libre y voluntariamente, autorizo de manera expresa e irrevocable a GAVASSA & CÍA. LTDA para que por intermedio de la
+entidad que designe o delegue, consultar, solicite, suministre, reporte, procese y divulgue toda la información a mi nombre y/o a nombre de la compañía que represento referente a
+comportamiento crediticio, financiero, comercial, de servicios y de terceros países de la misma naturaleza en cualquiera de las Centrales de riesgo (Transición (Cifin), Datacrédito y
+Procrédito, etc.).
+Conozco que el alcance de esta autorización implica que el comportamiento frente a las obligaciones propias y de la Empresa a la cual represento será registrado con el objeto de
+suministrar información suficiente y adecuada al mercado sobre el estado de las obligaciones financieras, comerciales, crediticias, de servicios y la proveniente de terceros países de
+la misma naturaleza. En consecuencia, quienes se encuentren afiliados y/o tengan acceso a la Central de riesgo podrán conocer esta información, de conformidad con la legislación
+y jurisprudencia aplicable. La información podrá ser igualmente utilizada para efectos estadísticos. Los derechos y obligaciones, así como la permanencia de la información en las
+bases de datos corresponden a lo determinado por el ordenamiento jurídico aplicable, del cual, por ser de carácter público, estoy enterado. Así mismo, manifiesto que conozco el
+contenido del reglamento de la Central de Información (Transición (Cifin), Datacrédito y Procrédito, etc.).
+En caso de que, en el futuro, el o los autorizados en este documento efectúen, a favor de un tercero, una venta de cartera o una cesión a cualquier título de las obligaciones a mi
+cargo o a cargo de la compañía que represento, los efectos de la presente autorización se extenderán a éste en los mismos términos y condiciones. Así mismo, autorizo a la Central
+de Riesgo a que, en su calidad de operador, ponga mi información a disposición de otros operadores nacionales o extranjeros, en los términos que establece la ley, siempre y
+cuando su objeto sea similar al aquí establecido.
+</p>
+            </div>
+            
+            <div class="auth-section">
+                <h3>Autorización para el Tratamiento de Datos Personales [cite: 130]</h3>
+                <p>la firma de este documento manifiesto que he sido informado por GAVASSA & CIA. LTDA. que: 1. La Compañía actuará como Responsable del Tratamiento de datos personales de
+los cuales soy titular y que, conjunta o separadamente podrán recolectar, usar y tratar mis datos personales conforme a la Política de Tratamiento de Datos Personales de la
+Compañía. 2. Es de carácter facultativo responder preguntas que versen sobre Datos Sensibles o sobre menores de edad. 3. Mis derechos como titular de los datos son los previstos
+en la Constitución y la ley, especialmente el derecho a conocer, actualizar, rectificar y suprimir mi información personal, así como el derecho a revocar el consentimiento otorgado
+para el tratamiento de Datos Personales. 4. Los derechos pueden ser ejercidos a través de los canales gratuitos dispuestos por la Compañía y observando la Política de Tratamiento
+de Datos Personales de la Compañía. 5. La Compañía garantiza la confidencialidad, libertad, seguridad, veracidad, transparencia, acceso y circulación restringida de mis datos y se
+reservan el derecho de modificar su Política de Tratamiento de Datos Personales en cualquier momento. Teniendo en cuenta lo anterior, autorizo de manera voluntaria, previa,
+explícita, informada e inequívoca a la Compañía para tratar mis datos personales de acuerdo con la Política de Tratamiento de Datos Personales de la Compañía y para los fines
+relacionados con su objeto social y en especial para fines legales, contractuales, comerciales descritos en la Política de Tratamiento de Datos Personales de la Compañía. La
+información obtenida para el Tratamiento de mis datos personales la he suministrado de forma voluntaria y es verídica.
+</p>
+            </div>
+            
+            <div class="form-group signature-block">
+                <label>
+                    <input type="checkbox" id="acepto-terminos" name="acepto_terminos" required>
+                    Con la firma del presente documento , de manera libre, expresa, inequívoca declaro que autorizo el Tramiento de datos personas en los términos del literal a)
+del artículo 6 de la Ley 1581 de 2012 a Gavassa & cia Ltda; igualmente estoy autorizando las consultas en las centrales de riesgos crediticios.
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label for="firma">Firma (Nombre Completo):</label>
+                <input type="text" id="firma" name="firma_nombre" required>
+            </div>
+        </fieldset>
+    
+    <fieldset>
+            <legend>Datos del Funcionario que Presenta el Tercero</legend>
+            
+            <div class="funcionario-section">
+                <div class="funcionario-declaracion">
+                    <p>
+                        Yo, <input type="text" id="func-nombre" name="func_nombre" class="inline-input" placeholder="Nombre del funcionario">
+                        en desarrollo de mi labor como <input type="text" id="func-cargo" name="func_cargo" class="inline-input" placeholder="Cargo del funcionario">
+                        de Gavassa & CIA LTDA. Expresamente me hago responsable por haber visitado al tercero y/o
+                        verificado y cumplido con los controles que me permite responder a las autoridades competentes y a la
+                        administración, por el conocimiento del tercero. Por lo tanto me permito entregar la presente solicitud de
+                        vinculación para su estudio y análisis.
+                    </p>
+                </div>
+                
+                <div class="funcionario-firma">
+                    <label for="func-firma-cedula">Firma y Cédula:</label>
+                    <input type="text" id="func-firma-cedula" name="func_firma_cedula">
+                </div>
+            </div>
+
+            <div class="funcionario-detalles">
+                <div class="form-group">
+                    <label for="func-zona">Zona Ejecutivo Comercial y/o Vendedor TAT:</label>
+                    <input type="text" id="func-zona" name="func_zona">
+                </div>
+                <div class="form-group">
+                    <label for="func-codigo">Código Ejecutivo Comercial y/o Vendedor TAT:</label>
+                    <input type="text" id="func-codigo" name="func_codigo">
+                </div>
+                <div class="form-group">
+                    <label for="func-ruta">Ruta del Cliente:</label>
+                    <input type="text" id="func-ruta" name="func_ruta">
+                </div>
+            </div>
+            
+            <p class="nota">
+                <strong>Nota:</strong> Todos los campos del presente formulario, deben ser diligenciado en su totalidad sin dejar espacios vacíos, en los casos que no aplique se puede colocar N/A
+            </p>
+        </fieldset>
+
+        <button type="submit">Enviar Formulario</button>
+    
+    
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
