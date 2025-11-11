@@ -1,138 +1,107 @@
-// Espera a que todo el contenido del DOM (la página) esté cargado
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Lógica para "Clase de Tercero" (Otro) ---
-    const otroCheckbox = document.getElementById('clase-tercero-otro');
-    const otroCualInput = document.getElementById('clase-tercero-cual');
-
-    otroCheckbox.addEventListener('change', () => {
-        if (otroCheckbox.checked) {
-            // Si marcan "Otro", muestra el campo de texto
-            otroCualInput.classList.remove('hidden');
-        } else {
-            // Si lo desmarcan, oculta y limpia el campo
-            otroCualInput.classList.add('hidden');
-            otroCualInput.value = '';
-        }
-    });
-
-    // --- Lógica principal de la Declaración PEP ---
-    const pepSiRadio = document.getElementById('pep-si');
-    const pepNoRadio = document.getElementById('pep-no');
-    const pepSection = document.getElementById('pep-declaration-section');
-    const pepRelativeSection = document.getElementById('pep-relative-section'); // Definido aquí para usarlo en pepNoRadio
-
-    pepSiRadio.addEventListener('change', () => {
-        if (pepSiRadio.checked) {
-            // Si es PEP, muestra toda la sección de declaración 
-            pepSection.classList.remove('hidden');
-        }
-    });
-
-    pepNoRadio.addEventListener('change', () => {
-        if (pepNoRadio.checked) {
-            // Si NO es PEP, oculta la sección 
-            pepSection.classList.add('hidden');
-            // También oculta la sub-sección de parientes
-            pepRelativeSection.classList.add('hidden');
-        }
-    });
-
-
-    // --- Lógica para la Pregunta 5 de PEP (Parientes) ---
-    const pepQ5SiRadio = document.getElementById('pep-q5-si');
-    const pepQ5NoRadio = document.getElementById('pep-q5-no');
-    // pepRelativeSection ya está definida arriba
-
-    pepQ5SiRadio.addEventListener('change', () => {
-        if (pepQ5SiRadio.checked) {
-            // Si tiene vínculo (Pregunta 5), muestra la tabla de parientes
-            pepRelativeSection.classList.remove('hidden');
-        }
-    });
-
-    pepQ5NoRadio.addEventListener('change', () => {
-        if (pepQ5NoRadio.checked) {
-            // Si no tiene vínculo, oculta la tabla
-            pepRelativeSection.classList.add('hidden');
-        }
-    });
-    
-    // --- Lógica de Fecha (Tu código original) ---
-    const campoFecha = document.getElementById('fecha');
-    const fechaEncabezado = document.getElementById('fecha-encabezado');
-
-    campoFecha.addEventListener('input', function () {
-        const fechaSeleccionada = this.value;
-        if (fechaSeleccionada) {
-            const fechaFormateada = formatearFecha(fechaSeleccionada);
-            fechaEncabezado.textContent = fechaFormateada;
-        } else {
-            fechaEncabezado.textContent = 'dd-mm-aaaa'; // Resetea si no hay fecha
-        }
-    });
-
-
-    // --- LÓGICA PARA GENERAR PDF (VERSIÓN FINAL CORREGIDA) ---
-    const form = document.getElementById('form-vinculacion');
-    
-    form.addEventListener('submit', (event) => {
-        // 1. Evita que el formulario se envíe de la forma tradicional
-        event.preventDefault(); 
-        
-        // 2. Elementos que queremos convertir o modificar
-        const element = document.body; // <-- CAMBIO: Capturamos todo el body
-        const submitButton = form.querySelector('button[type="submit"]');
-        const authSections = document.querySelectorAll('.auth-section'); 
-
-        // 3. Opciones para html2pdf
-        const opt = {
-          margin:       [0.5, 0.5, 0.5, 0.5], // [top, left, bottom, right] en pulgadas
-          filename:     'formulario_vinculacion.pdf',
-          image:        { type: 'jpeg', quality: 0.98 },
-          html2canvas:  { scale: 2, useCORS: true, scrollY: 0 }, // Asegura empezar arriba
-          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-          pagebreak:    { mode: ['css', 'avoid-all'] } // Respeta los saltos de página CSS
-        };
-
-        // --- 4. PREPARAR EL HTML ANTES DE LA "CAPTURA" ---
-        
-        // Oculta el botón "Enviar"
-        submitButton.style.display = 'none';
-        
-        // Expande las cajas de texto con scroll
-        authSections.forEach(section => {
-            section.style.maxHeight = 'none';
-            section.style.overflowY = 'visible';
-        });
-
-        // Aseguramos que la "foto" se tome desde el inicio de la página
-        window.scrollTo(0, 0);
-
-        // 5. Llama a la biblioteca para generar y descargar el PDF
-        html2pdf().set(opt).from(element).save().finally(() => {
-            // --- 6. RESTAURAR EL HTML (después de que el PDF se genere o falle) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica para 'Clase de Tercero: Otro'
+            const otroTerceroCheck = document.getElementById('tercero_otro');
+            const otroTerceroInput = document.getElementById('tercero_otro_cual');
             
-            // Vuelve a mostrar el botón
-            submitButton.style.display = 'block';
-            
-            // Devuelve el scroll a las cajas de texto
-            authSections.forEach(section => {
-                section.style.maxHeight = '150px'; // El valor original de tu CSS
-                section.style.overflowY = 'auto';  // El valor original de tu CSS
+            otroTerceroCheck.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    otroTerceroInput.style.display = 'inline-block';
+                    otroTerceroInput.focus();
+                } else {
+                    otroTerceroInput.style.display = 'none';
+                    otroTerceroInput.value = '';
+                }
             });
+
+            // Lógica para 'Documento: Otro'
+            const otroDocInput = document.getElementById('doc_otro_cual');
+            document.querySelectorAll('input[name="documento_tipo"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.id === 'doc_otro' && e.target.checked) {
+                        otroDocInput.style.display = 'inline-block';
+                        otroDocInput.focus();
+                    } else {
+                        if (e.target.id !== 'doc_otro') {
+                            otroDocInput.style.display = 'none';
+                            otroDocInput.value = '';
+                        }
+                    }
+                });
+            });
+
+            // Lógica para 'Producto Moneda Extranjera'
+            const productosExtranjerosSection = document.getElementById('productosExtranjerosSection');
+            document.querySelectorAll('input[name="tiene_productos_extranjeros"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.value === 'si' && e.target.checked) {
+                        productosExtranjerosSection.style.display = 'flex'; /* Cambiado a flex */
+                    } else {
+                        productosExtranjerosSection.style.display = 'none';
+                    }
+                });
+            });
+
+            // Lógica para PEP Pregunta 5 (mostrar tabla)
+            const pepTableSection = document.getElementById('pepTableSection');
+            document.querySelectorAll('input[name="pep_pregunta_5"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.value === 'si' && e.target.checked) {
+                        pepTableSection.style.display = 'block';
+                    } else {
+                        pepTableSection.style.display = 'none';
+                    }
+                });
+            });
+
+            // Manejo del envío del formulario (prevenir envío real)
+            const form = document.getElementById('vinculacionForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Aquí iría la lógica para enviar los datos a un servidor
+                // Usamos un modal simple en lugar de alert()
+                showModal('Formulario listo para ser enviado (envío deshabilitado en este ejemplo).');
+            });
+            
+            // Función de modal simple para evitar alert()
+            function showModal(message) {
+                let modalOverlay = document.createElement('div');
+                modalOverlay.style.position = 'fixed';
+                modalOverlay.style.top = '0';
+                modalOverlay.style.left = '0';
+                modalOverlay.style.width = '100%';
+                modalOverlay.style.height = '100%';
+                modalOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                modalOverlay.style.display = 'flex';
+                modalOverlay.style.justifyContent = 'center';
+                modalOverlay.style.alignItems = 'center';
+                modalOverlay.style.zIndex = '1000';
+                
+                let modalBox = document.createElement('div');
+                modalBox.style.backgroundColor = 'white';
+                modalBox.style.padding = '20px';
+                modalBox.style.borderRadius = '5px';
+                modalBox.style.textAlign = 'center';
+                
+                let modalMessage = document.createElement('p');
+                modalMessage.textContent = message;
+                modalMessage.style.margin = '0 0 15px 0';
+                
+                let closeButton = document.createElement('button');
+                closeButton.textContent = 'Cerrar';
+                closeButton.style.padding = '5px 10px';
+                
+                modalBox.appendChild(modalMessage);
+                modalBox.appendChild(closeButton);
+                modalOverlay.appendChild(modalBox);
+                document.body.appendChild(modalOverlay);
+                
+                closeButton.onclick = function() {
+                    document.body.removeChild(modalOverlay);
+                }
+                modalOverlay.onclick = function(e) {
+                    if (e.target === modalOverlay) {
+                        document.body.removeChild(modalOverlay);
+                    }
+                }
+            }
         });
-    });
-
-}); // Fin del DOMContentLoaded principal
-
-
-// --- Funciones (Tu código original) ---
-// (Movidas fuera del DOMContentLoaded)
-
-function formatearFecha(fechaISO) {
-  // Tu formato de (YYYY-MM-DD) a (DD-MM-YYYY) es más eficiente
-  if (!fechaISO) return '';
-  const [año, mes, dia] = fechaISO.split('-');
-  return `${dia}-${mes}-${año}`;
-}

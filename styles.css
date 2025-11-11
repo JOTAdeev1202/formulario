@@ -1,0 +1,499 @@
+       body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #cccccc; /* Fondo gris para ver el formulario */
+            color: #000;
+            font-size: 10px; /* Tamaño de fuente base similar al PDF */
+            line-height: 1.2;
+        }
+
+        /* Contenedor principal que simula la hoja */
+        .container {
+            max-width: 800px; /* Ancho similar al de una hoja A4 */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Colores PDF --- */
+        :root {
+            --pdf-gray: #e6e6e6; /* Color gris claro exacto del PDF */
+            --pdf-border: #000;
+            --pdf-border-thick: 2px solid #000;
+        }
+
+        /* Contenedor de la cabecera (NUEVO - Basado en imagen) */
+        .header {
+            display: flex;
+            border: var(--pdf-border-thick);
+            border-bottom: 1px solid var(--pdf-border);
+            align-items: stretch; /* Estira las columnas a la misma altura */
+        }
+
+        .header-logo {
+            flex-basis: 120px; /* Ancho fijo para el logo */
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid var(--pdf-border);
+            padding: 5px;
+        }
+        
+        .header-logo span {
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        .header-title-main {
+            flex-grow: 1;
+            text-align: center;
+            border-right: 1px solid var(--pdf-border);
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .header-title-main h1 {
+            font-size: 13px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .header-title-main p {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .header-info {
+            flex-basis: 150px; /* Ancho fijo para la info */
+            flex-shrink: 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        
+        .info-box {
+            border-bottom: 1px solid var(--pdf-border);
+            padding: 6px;
+        }
+        
+        .info-box:last-child {
+            border-bottom: none;
+        }
+
+
+        /* Sección de Fecha (NUEVO - Basado en imagen) */
+        .date-section {
+            display: flex;
+            border: var(--pdf-border-thick);
+            border-top: 1px solid var(--pdf-border); /* Ajuste por el header */
+        }
+
+        .date-section-label {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            border-right: 1px solid var(--pdf-border);
+        }
+        
+        .date-section-inputs {
+            display: flex;
+            flex-basis: 200px; /* Ancho fijo para los inputs */
+            flex-shrink: 0;
+        }
+        
+        .date-part {
+            flex: 1;
+            border-right: 1px solid var(--pdf-border);
+            padding: 3px 5px;
+            text-align: center;
+        }
+        
+        .date-part:last-child {
+            border-right: none;
+        }
+        
+        .date-part label {
+            font-size: 9px;
+            color: #777;
+            font-weight: normal;
+        }
+        
+        .date-input-box {
+            width: 100%;
+            border: none;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .date-input-box:focus {
+            outline: none;
+        }
+
+
+        /* Sección superior (Tipo/Clase - MODIFICADO) */
+        .type-section {
+            display: flex;
+            border: var(--pdf-border-thick);
+            border-top: 1px solid var(--pdf-border);
+        }
+        
+        .type-section > div {
+            flex: 1;
+            border-right: 1px solid var(--pdf-border);
+            padding: 5px 10px;
+        }
+        
+        .type-section > div:last-child {
+            border-right: none;
+        }
+        
+        .type-section .check-group {
+            gap: 15px;
+        }
+
+        /* Estilo general para las cajas/secciones */
+        .section-box {
+            border: 1px solid var(--pdf-border);
+            margin-top: 10px;
+            padding: 0; /* Sin padding, el contenido lo maneja */
+        }
+        
+        /* Título de sección (Barra Gris) */
+        .section-title {
+            font-weight: bold;
+            font-size: 11px;
+            background-color: var(--pdf-gray);
+            padding: 5px;
+            border-bottom: 1px solid var(--pdf-border);
+        }
+        
+        /* Contenido de sección (Área Blanca) */
+        .section-content {
+            /* padding: 5px; (manejado por las filas) */
+        }
+
+        /* Contenedores Flex para filas */
+        .flex-row {
+            display: flex;
+            border-top: 1px solid var(--pdf-border);
+        }
+        
+        .flex-row.no-border {
+            border-top: none;
+        }
+        
+        .flex-col {
+            flex: 1;
+            padding: 5px;
+            border-right: 1px solid var(--pdf-border);
+            min-width: 0; /* Permite que las columnas se encojan */
+        }
+        
+        .flex-col:last-child {
+            border-right: none;
+        }
+
+        .flex-col-2 { flex: 2; padding: 5px; border-right: 1px solid var(--pdf-border); }
+        .flex-col-3 { flex: 3; padding: 5px; border-right: 1px solid var(--pdf-border); }
+        .flex-col-2:last-child { border-right: none; }
+        .flex-col-3:last-child { border-right: none; }
+
+        /* Estilo para los campos de formulario */
+        label, span.label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        /* Input style for cells (no border) */
+        .cell-input {
+            width: 100%;
+            border: none;
+            padding: 0;
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: transparent;
+        }
+        
+        .cell-input:focus {
+            outline: none;
+            background-color: #fefbed; /* Resaltado suave al enfocar */
+        }
+        
+        /* Input con borde (para campos especiales) */
+        .bordered-input {
+             width: 100%;
+            padding: 2px;
+            border: 1px solid #777;
+            border-radius: 0;
+            box-sizing: border-box;
+            font-size: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 2px;
+            border: 1px solid #777;
+            border-radius: 0;
+            box-sizing: border-box;
+            font-size: 10px;
+            resize: vertical;
+        }
+        
+        /* Estilo para checkboxes y radios */
+        .check-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 10px; /* Tighter gap */
+            align-items: center;
+        }
+        
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .check-item label {
+            font-weight: normal;
+            margin: 0;
+        }
+        
+        /* Perfil Tributario (Diseño especial) */
+        .perfil-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .perfil-item {
+            display: flex;
+            border-top: 1px solid var(--pdf-border);
+        }
+        
+        .perfil-item span.perfil-label {
+            flex: 1;
+            padding: 5px;
+            font-weight: bold;
+            background-color: var(--pdf-gray);
+            border-right: 1px solid var(--pdf-border);
+        }
+        
+        .perfil-item .perfil-check {
+            flex: 1;
+            padding: 5px;
+            border-right: 1px solid var(--pdf-border);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Ajustes de bordes de la cuadrícula */
+        .perfil-item:nth-child(odd) {
+             /* sin borde izquierdo */
+        }
+        .perfil-item:nth-child(even) .perfil-check {
+            border-right: none;
+        }
+        .perfil-item:nth-child(1), .perfil-item:nth-child(2) {
+            border-top: none; /* Sin borde superior para la primera fila */
+        }
+        
+        /* Operaciones Moneda Extranjera (Diseño especial) */
+        .question-row {
+            display: flex;
+            border-top: 1px solid var(--pdf-border);
+        }
+
+        .question-row.no-border {
+            border-top: none;
+        }
+        
+        .question-row span.question-label {
+            flex: 2;
+            padding: 5px;
+            font-weight: bold;
+            background-color: var(--pdf-gray);
+            border-right: 1px solid var(--pdf-border);
+        }
+        
+        .question-row .question-check {
+            flex: 1;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Sub-tabla de Productos */
+        .productos-grid {
+            display: flex;
+            border-top: 1px solid var(--pdf-border);
+        }
+        
+        .productos-grid div.flex-col {
+            flex: 1;
+            padding: 5px;
+            border-right: 1px solid var(--pdf-border);
+        }
+        .productos-grid div.flex-col:last-child {
+            border-right: none;
+        }
+        
+        .productos-grid label {
+            font-size: 9px;
+        }
+        
+        /* Contenedores de texto largo */
+        .text-container {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #aaa;
+            padding: 8px;
+            font-size: 9px;
+            line-height: 1.5;
+            margin: 10px;
+            background-color: #fdfdfd;
+        }
+        
+        .text-container.no-border {
+            border: none;
+            margin: 0;
+            padding: 8px;
+            max-height: none;
+            background-color: #fff;
+        }
+        
+        .text-container p {
+            margin: 5px 0;
+        }
+
+        /* Título gris dentro de un contenedor blanco */
+        .section-title-inner {
+            font-weight: bold;
+            background-color: var(--pdf-gray);
+            padding: 5px;
+            text-align: center;
+            border: 1px solid var(--pdf-border);
+            border-left: none;
+            border-right: none;
+        }
+        
+        /* Tabla PEP */
+        table.pep-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 0 0;
+        }
+        
+        table.pep-table th,
+        table.pep-table td {
+            border: 1px solid var(--pdf-border);
+            padding: 4px;
+            text-align: center;
+            font-size: 9px;
+        }
+        
+        table.pep-table th {
+            background-color: var(--pdf-gray); /* Cabecera de tabla gris */
+            font-weight: bold;
+        }
+        
+        table.pep-table input {
+            width: 100%;
+            border: none;
+            padding: 2px;
+            box-sizing: border-box;
+            font-size: 9px;
+            text-align: center;
+            background-color: transparent;
+        }
+        
+        /* Sección Firma */
+        .firma-section {
+            display: flex;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .firma-box {
+            border-top: 1px solid var(--pdf-border);
+            border-right: 1px solid var(--pdf-border);
+            padding: 5px;
+            flex: 1;
+            min-height: 40px; /* Espacio para la firma */
+        }
+        .firma-box:last-child {
+            border-right: none;
+        }
+        .firma-box input {
+            border: none;
+            border-bottom: 1px solid #000;
+            text-align: center;
+            width: 80%;
+            background-color: transparent;
+        }
+
+        /* Datos Funcionario */
+        .funcionario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid var(--pdf-border);
+        }
+        .funcionario-grid > div {
+            padding: 5px;
+            border-top: 1px solid var(--pdf-border);
+            border-right: 1px solid var(--pdf-border);
+        }
+        .funcionario-grid > div:nth-child(odd) {
+            border-left: none;
+        }
+        .funcionario-grid > div:nth-child(even) {
+            border-right: none;
+        }
+         .funcionario-grid > div:nth-child(1), .funcionario-grid > div:nth-child(2) {
+            border-top: none; /* First row no top border */
+         }
+
+
+        /* Ocultar elementos por defecto */
+        .hidden-section {
+            display: none;
+        }
+        
+        /* Botón de envío */
+        .submit-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .submit-button button {
+            background-color: #004a99;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .submit-button button:hover {
+            background-color: #003366;
+        }
+        
+        /* Nota al final */
+        .footer-note {
+            font-size: 9px;
+            font-style: italic;
+            text-align: center;
+            margin-top: 15px;
+        }
